@@ -1,0 +1,60 @@
+@media (max-width: 320px){
+	#dv1{
+		width:310px;
+	}
+	div#study{
+		width:300px;
+	}
+	div#next-game-dv1{
+		width:310px;
+		top:-25px;
+	}
+	div#next-game2-dv1{
+		width:310px;
+	}
+	div#finish-div{
+		width:310px;
+		border-radius:0;/* 14.04.2022 */
+	}
+	div#dv-study{
+		width:310px;
+	}
+	.verify-next {
+		margin-left:15px;
+	}
+}
+
+@media (max-width:698px){
+	#dv8{
+		display:none;
+	}
+}
+
+@media (max-width:749px){
+	#menu-right{
+		display:none;
+	}
+}
+
+@media (max-height:560px){
+	.blink_input_start{
+	  animation: inputstart 0.5s linear infinite;
+	  animation-delay:2s;
+	}
+	@keyframes inputstart{
+		50%{
+			outline:5px solid lightgreen;
+		}
+	}
+}
+
+@media (max-width:1019px){
+	sup {
+		font-size:9px;/*8*/
+		color:green;
+		top:-12px;
+		font-weight:bold;
+		left:-3px;
+		position:relative;
+	}
+}

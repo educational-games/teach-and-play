@@ -1,0 +1,1013 @@
+<script>
+	var randomActived=false;
+	var vtexto="quiz_letters3";
+	var randomStringInUrl=null;
+	var randomPlayAgain=false;
+	var userIsLoggedJS=false;
+	var userIsPremium=0;
+    var gameWordsQty="";
+    var sessionSanitize1="";
+    var adminUser=false;
+
+    var quizWordLength=vtexto.replace("quiz_","");
+    var quizWordLengthGame=1;
+    var goToLiThisId=quizWordLength+quizWordLengthGame;
+    var goToLiUrlPath=window.location.search;
+
+    // THIS IS NECESSARY TO PUT A STAR ON RIGHT SIDE AT GAME LEVEL //
+    var getIdParam="i";
+    var getCatParam=vtexto.replace("quiz_letters","");
+
+    // 10.12.2022 //
+    var getGameNumber=(quizWordLengthGame+7)/8;
+        // THIS IS NECESSARY TO PUT A STAR ON RIGHT SIDE AT GAME LEVEL //
+
+    if((sessionStorage.go_to_li_game)&&((!userIsLoggedJS)||(userIsPremium!=1))){
+        var removingQuiz=vtexto.replace("quiz_","");
+        var sessionGoTo=sessionStorage.go_to_li_game.replace(removingQuiz,"");
+        if(sessionGoTo>3){
+            sessionStorage.removeItem("go_to_li_game");
+        }
+    }
+
+	if(randomActived){
+		var categoryName = vtexto;
+
+		categoryName=categoryName+"_en_sp";
+
+		var sessionString="";
+
+		var categoryNameRandom=categoryName+"_random";
+
+        gameWordsQty=1;
+
+		if(localStorage.getItem(categoryName)){
+
+			sessionSanitize1 = localStorage.getItem(categoryName);
+			sessionSanitize1=sessionSanitize1.replace(/&|<|"|\'/g,'');
+
+			sessionSanitize1=sessionSanitize1.split(",");
+
+            if(gameWordsQty>100){
+                var randomGameResetLocalStorageInfo=30;
+            }else{
+                var randomGameResetLocalStorageInfo=Math.ceil(gameWordsQty/5);
+            }
+
+			if((sessionSanitize1.length-1) >= randomGameResetLocalStorageInfo){
+				localStorage.removeItem(categoryName);
+				localStorage.removeItem(categoryNameRandom);
+				sessionStorage.removeItem(categoryName);
+			}else{
+				sessionString=sessionSanitize1.toString();
+
+				if((localStorage.getItem(categoryNameRandom))&&(!randomPlayAgain)){
+
+					var x=localStorage.getItem(categoryName);
+					var y=localStorage.getItem(categoryNameRandom);
+					var z=window.location.href;
+					z=z.replace(/^(.*)(&randomString.*)$/g,'$1');
+
+					if(x!=y){
+						localStorage.setItem(categoryNameRandom,sessionString);
+
+                        if(sessionStorage.getItem(categoryName)){
+                            sessionString=sessionString+sessionStorage.getItem(categoryName);
+
+                            var sessionStringArray = sessionString.split(',');
+
+                            sessionString=sessionStringArray.filter(function(item,index,inputArray){
+                                return inputArray.indexOf(item)==index;
+                            });
+
+                            sessionString=sessionString.toString();
+                        }
+
+						location.replace(z+"&randomString=,"+sessionString);
+					}else if(!randomStringInUrl){
+						location.replace(z+"&randomString=,"+sessionString);
+					}
+				}else{
+					localStorage.setItem(categoryNameRandom,sessionString);
+				}
+			}
+		}
+	}
+</script>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Learn English With Games!</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="styles/style-1037.css">
+		<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167185363-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-167185363-1');
+        </script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script type='text/javascript'>
+			var varA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
+			var varB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
+			var varAA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
+			var varBB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
+			var valueLevel=1;
+			var varIndex=[];
+			var liJqueryOpenWhenRefresh=false;
+			var allGamesClickGoTopFalse=true;
+			var liFirstGoTop=true;
+			var customActived=false;
+			var customStringBool=null;
+			var varIndiceIndex=["7","3","2","6","5","1","4","8"];
+			var gameUrlNumber="3";
+			var dontShowPlaceholder=null;
+			var dontShowKeyboard=null;
+			var openCustomDiv=false;
+			var valueLevelForTouchGame=valueLevel;
+		</script>
+		<style>
+			#correct-image-green{
+				height:100%;
+				width:100%;
+			}
+            #dv1{
+            	display:none;
+            }
+            .next-game2-dv3{
+            	display:none;
+            }
+            		</style>
+	</head>
+	<body>
+		<div id="dv1">
+			<div id="dv2" class='different-selection-color'>
+			</div>
+			<div class="triangle-right"></div>
+			<div class="triangle-left"></div>
+			<div id="dv3">
+			</div>
+			<div id="study">
+				<p id="home-link" class="p-game margin-left-zero" style="display:block;">Game 1</p>
+				<p id="see-list" onclick="nextGame3()">Game 1</p>
+				<div id="pointing" style="display: none;"></div>
+			</div>
+			<div id="trainee-game-link">
+				<p id="trainee-game-link" class="trainee-game-link" onclick="location.reload()"><!--<span class="trainee_blink_circle">&#9679;</span>--> Main Game</p>
+			</div>
+		</div>
+		<div id="next-game2-dv1">
+			<div id="next-game2-dv3" class="next-game2-dv3">
+			    <input type='text' onclick='deleteLastCharOnKeyboardMode(this.value);' onfocus='blurInputWhenKeyboardOn()' onkeyup='showAnswerInAlert(this.value,this)' id='next-game2-input-text' spellcheck='false' autocomplete='off' maxlength='100' autocorrect='off' style='visibility:hidden;background-color:white;' tabindex='1'>				<input id="training-mode-btn" style="display:none" type="button" onclick="newStudyGame()" value="Game 1">
+				<input id="training-mode-btn2" style="display:none" type="button" onclick="openDivStudy3()" value="Game 2">
+				<input id="go-hangman" type="button" onclick="location.reload()" value="Go Hangman">
+
+				<input type="button" class="verify-vf" id="verify" onclick="nextGame3verify();stopBlink();" value="verify" style="display:none;"><input type="button" class="verify-next" id="next-button" onclick="nextButtonTrainee()" value="next" style="display: none;"><span id="equalNotNeeded" class="equal-not-needed">Não precisa colocar&nbsp; =</span>
+				<div id="trainee-game">
+				</div>
+				<input type="button" id="see-answer" value=" ? " onclick="seeAnswer()">
+				<p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();/*returnGameFocusTextInput();*/" style="display: none;">Game '<!--<span class="arrow-size"><</span>--></p>
+				<div id='random-answer-btn' style='display:none'></div>
+				<div id="special-chars-keyboard"></div>
+				<input class="hide-button" type="button" onclick="hintButton()" value="Hint *">
+				<span class="show-answer-few-seconds"></span>
+			</div>
+			<div id="dv5">
+			    <div class='different-selection-color'>
+    				<div id="pontuation" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Score</p><div class="info-game" id="pontuation2"></div></div>
+    				<div id="time" class="blink_time_start" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Time</p><div class="info-game" id="timer2"></div></div>
+    				<div id="erros" style="display:none;"><p class="info-divs">Repetindo</p><div class="info-erros" id="info-errors">Erros: </div></div>
+				</div>
+				<div id='menu-links-gm'><ul id='home-index-links-gm'><li><a class='account a-italic' href='../../login.php'>Login</a></li><script>liJqueryOpenWhenRefresh=true;</script><li><a class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a></li></ul></div><script>var allGamesRootPage=false;</script>			</div>
+			<p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();">Game ←</p>
+		</div>
+
+        <div class='dv-study-mode'>
+            <h2 class='h2-study-mode'>Go to Study Mode ?</h2>
+            <br><br>
+            <input id='fast' type='radio' name='study-speed' value='fast' onclick='studyModeOk()'>
+            <label for='fast'>Fast</label><br><br>
+            <input id='medium' type='radio' name='study-speed' value='medium' onclick='studyModeOk()'>
+            <label for='medium'>Medium</label><br><br>
+            <input id='slow' type='radio' name='study-speed' value='slow' onclick='studyModeOk()'>
+            <label for='slow'>Slow</label>
+            <div class='study-mode-btn'>
+                <input type='button' value='Ok' style='margin-right:12px;' onclick='studyModeOk()'>
+                <input type='button' value='Cancel' onclick='studyModeCancel()'>
+            </div>
+        </div>
+
+		<div id="menu-right" style='visibility:visible' class='menu'>
+			<p id="all-levels2-p" style="display:block;" class="first-p">All Games</p>
+			<ul id="all-levels2" style="display:block;" class="all-levels">
+	<!---->
+		<!---->
+    <li id="a" class="all-levels letters3-list" onclick="/*yyy2(this.className,this.id);*/"><a class="all-levels letters3-list" href="#">& Vocabulary</a></li>
+	<li class='all-levels-sub-cat letters3'><a id='letters31' href='?cat=quiz_letters3&num=1&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 1</a></li><li class='all-levels-sub-cat letters3'><a id='letters32' href='?cat=quiz_letters3&num=9&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 2</a></li><li class='all-levels-sub-cat letters3'><a id='letters33' href='?cat=quiz_letters3&num=17&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 3</a></li><li class='all-levels-sub-cat letters3'><a id='letters34' href='?cat=quiz_letters3&num=25&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 4 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters35' href='?cat=quiz_letters3&num=33&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 5 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters36' href='?cat=quiz_letters3&num=41&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 6 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters37' href='?cat=quiz_letters3&num=49&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 7 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters38' href='?cat=quiz_letters3&num=57&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 8 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters39' href='?cat=quiz_letters3&num=65&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 9 <sup class='premium-sup'>premium</sup></a></li>	<!---->
+		<!-- THIS CATEGORY IS PRIVATE -->
+			<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
+	    <div id="show-all-games-no-logged-user"></div>
+    <li id="all-games-li" class="all-levels letters9998-list" onclick="showAllGamesNoLoggedUser()"><a class="all-levels letters1101-list" href="#">& All Games?</a></li>
+    <li class="all-levels letters9999-list" style="margin-top:22px;">
+        <a class="all-levels" style="color:navy;" href="../../login.php">+ 900 Games!</a>
+    </li>
+    	<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
+				</ul>
+			<p id="return-to-game-resp" onclick="returnToGameResp()" class="last-p">Close tab</p>
+		</div>
+
+		<!-- NEW RIGHT MENU  -->
+
+		<!-- STAR IMAGE ON RIGHT SIDE OF GAME -->
+        
+		<div id="finish-div" style="display:none;">
+			<p style="font-weight:bold">Finish<span class='/*menu_right_blink4*/'>!!</span></p>
+            <a class="account a-italic finish-div-last-games" href="../../user-last-games.php">Last Games</a>
+			<p>Your Score is: <span id="final-pontuation"></span></p>
+			<p>Time: <span id="final-time"></span><span style='font-weight:bold'> sec</span>.</p><hr>
+            <input type="button" id="play_again_button" value="Play Again!" onclick="userClickPlayAgain();pointerEventsNone(this.id);playAgainNextGame3Shuffle();">
+            <input type="button" id='quiz_letters3_en_sp_btn' value="<< Next Game! >>" onclick="pointerEventsNone(this.id);goToLiGame('letters32','https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=9&id=i');location.href='?cat=quiz_letters3&num=9&id=i';">
+            <a id="all-games-btn-finish-div-mobile" class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a>
+		</div>
+
+        <div class="study-here-div"></div>
+
+        <div class="touch-game-div" style="display:none">
+          <span class='touch-game-sp touch-game-close' onclick="touchGameClose(0)">Exit</span>
+          <div class="dv-question center-text-vertically"></div>
+          <div class="dv-buttons-container"></div>
+          <span onclick="touchGameClose(0)" style="font-size:14px" class="game5-return-to-hangman-button">Return to Hangman!</span>
+        </div>
+        <div class='touch-game-finish-div' style='height:345px;'>
+          <input type="button" value="Play Again!" id="play-again-btn">
+          <input type="button" value="Next Game!" id="next-game-btn">
+          <!--<input type="button" value="Go to Quiz!" onclick="touchGameClose()">-->
+          <input type="button" value="Go Hangman!" onclick="touchGameClose()">
+        </div>
+
+        <div class='nsg-main-div'>
+          <div class='nsg-div-with-question-and-answer' onclick='makeRedInfoTransparentNSG()'></div>
+          <div id='nsg-buttons-div'>
+            <input type='button' value='next' class='nsg-btn-class next_button_blink' id='nsg-next-button' onclick='nsgNextButtonFunc()'>
+            <!-- 27.12.2022 -->
+            <!--<input type="text" class="nsg-btn-class" style="top:200px">-->
+            <!-- 27.12.2022 -->
+            <input type='button' value='skip' class='nsg-btn-class nsg-btn-skip' id='nsg-skip-button' onclick='nsgSkipButtonFunc()'>
+            <input type='button' value='verify' class='nsg-btn-class next_button_blink' id='nsg-verify-button' onclick='nsgVerifyButtonFunc()'>
+            <input type='button' value='return' class='nsg-btn-class' id='nsg-return-button' onclick='nsgReturnButtonFunc()'>
+            <input type='button' value='clear' class='nsg-btn-class' id='nsg-clear-button' onclick='nsgClearButtonFunc()'>
+            <input type='button' value='Blind' class='nsg-btn-class' id='btn-blind-text' onclick='makeTextTransparent()'>
+            <div class='nsg-div-with-answer-buttons'></div>
+            <!--<span onclick='closeDivStudy()' class='nsg-return-to-quiz-button'>Return to Quiz!</span>-->
+            <span onclick='closeDivStudy()' class='nsg-return-to-quiz-button'>Return to Hangman!</span>
+          </div>
+        </div>
+        <div id='nsg-final-div' class='nsg-main-div'>
+          <input type="button" id='nsg-play-again-btn' class='nsg-final-div-buttons' value='Play Again!' onclick='nsgPlayAgain()'>
+          <!--<input type="button" id='nsg-go-to-quiz-btn' class='nsg-final-div-buttons' value='Go to Quiz!' onclick='closeDivStudy()'>-->
+          <input type="button" id='nsg-go-to-quiz-btn' class='nsg-final-div-buttons' value='Hangman!' onclick='closeDivStudy()'>
+        </div>
+
+        <!-- NEW STUDY GAME 2 -->
+        <!---->
+        <div class='nsg2-main-div'>
+          <div class='nsg2-div-with-question-and-answer'></div>
+          <span id="private-game-cheat-span"></span>
+          <div id='nsg2-buttons-div'>
+            <input type='button' value='next' class='nsg2-btn-class menu_right_blink3' id='nsg2-next-button' onclick='nsg2_NextButtonFunc()'>
+            <input type='button' value='verify' class='nsg2-btn-class' id='nsg2-verify-button' onclick='nsg2_VerifyButtonFunc()'>
+            <input type='button' value='return' class='nsg2-btn-class' id='nsg2-return-button' onclick='nsg2_ReturnButtonFunc()'>
+            <input type='button' value='skip' class='nsg2-btn-class' id='nsg2-clear-button' onclick='nsg2_SkipButtonFunc()'>
+            <div class='nsg2-div-with-answer-buttons'></div>
+            <!--<span onclick='location.reload()' class='nsg2-return-to-quiz-button'>Return to Hangman!</span>-->
+            <!--<span onclick='touchGameClose(2)' class='nsg2-return-to-quiz-button'>Return to Hangman!</span>-->
+            <span onclick='newStudyGame2_close()' class='nsg2-return-to-quiz-button'>Return to Hangman!</span>
+          </div>
+        </div>
+        <div id="nsg2-blanks-div"></div>
+        <div id='nsg2-final-div' class='nsg2-main-div'>
+          <input type="button" id='nsg2-play-again-btn' class='nsg2-final-div-buttons' value='Play Again!' onclick='nsg2_PlayAgain()'>
+          <input type="button" id='nsg2-go-to-quiz-btn' class='nsg2-final-div-buttons' value='Go Hangman!' onclick='closeDivStudy(2)'>
+        </div>
+        <!---->
+        <!-- NEW STUDY GAME 2 -->
+
+        <!-- HANGMAN -->
+        <!---->
+        <div class="hm-main-one">
+          <div class="hm-main-two">
+            <div class='hm-dv-hangman'>
+              <div class='hm-see-list-show-answer hm-see-list' onclick='hmShowOneLetter();event.stopPropagation();'>&#9679; 1 Letter</div>
+            </div>
+            <div class="hm-dv-question">
+              <span class="hm-start-title">Hangman!</span>
+              <span class="hm-start-title" style="top:110px;color:#222;">Game 1</span>
+              <div class="hm-dv-start"><input type="button" class="hm-button-blink" value="START" onclick="hmStartingGame()"></div>
+            </div>
+            <div class="hm-dv-answer">
+              <div class="hm-dv-letter-answer hm-position-initial">&nbsp;</div>
+              <div class="hm-dv-letter-answer hm-position-initial">&nbsp;</div>
+              <div class="hm-dv-letter-answer hm-position-initial">&nbsp;</div>
+              <div class="hm-dv-letter-answer hm-position-initial">&nbsp;</div>
+              <div class="hm-dv-letter-answer hm-position-initial">&nbsp;</div>
+            </div>
+            <div class="hm-dv-keyboard">
+              <div class="hm-dv-buttons-main">
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">Q</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">W</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">E</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">R</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">T</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">Y</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">U</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">I</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">O</div>
+                <div class="hm-dv-button" id="hm-letter-g" onclick="hmAlphabetKey(this)">P</div>
+              </div>
+              <div class="hm-dv-buttons-main">
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">A</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">S</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">D</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">F</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">G</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">H</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">J</div>
+                <div class="hm-dv-button" id="hm-letter-m" onclick="hmAlphabetKey(this)">K</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">L</div>
+              </div>
+              <div class="hm-dv-buttons-main">
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">Z</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">X</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">C</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">V</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">B</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">N</div>
+                <div class="hm-dv-button" onclick="hmAlphabetKey(this)">M</div>
+              </div>
+              <input type="button" id="private-game-hm-show-ans-btn" onclick="showAnsInAlert()">
+              <input type="button" id="private-game-hm-letter-answer-hidden" onclick="hmLetterAnswerHidden()">
+            </div>
+            <div class="hm-footer">
+              <a class='hm-login' href='../../login.php'>Login</a><a class='hm-go-quiz' onclick='closeDivStudy(1)'>Go Quiz</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
+          </div>
+          <div class="hm-correct-wrong-div">
+            <div class="hm-info"></div>
+            <div class="hm-info-string"></div>
+            <div class="hm-info-index"></div>
+            <div class="hm-info-hmScore"></div>
+          </div>
+          <div class="hm-finish-div hm-correct-wrong-div">
+            <div class="hm-info">Finish!!</div>
+            <div class="hm-info-string"></div>
+            <div class="hm-info-hmScore"></div>
+            <input type="button" class="hm-info-next hm-play-again-btn" onclick="hmPlayAgainBtn(2)" value="Play again">
+            <input type="button" class="hm-info-next hm-info-next-finish" id='hm-next-game' onclick="pointerEventsNone(this.id);goToLiGame('letters32','https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=9&id=i');location.href='?cat=quiz_letters3&num=9&id=i';" value="Next game">
+            <!--<input type="button" class="hm-info-next hm-last-games-btn" onclick="window.location='../../user-last-games.php';" value="Last games">-->
+            <input type="button" class="hm-info-next hm-last-games-btn" onclick="closeDivStudy(1)" value="Go quiz!">
+            <div class="hm-footer">
+              <a class='hm-login' href='../../login.php'>Login</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
+          </div>
+          <div class="hm-dv-study-here hm-correct-wrong-div" onclick="hmStudyNext()">
+          </div>
+        </div>
+        <!---->
+        <!-- HANGMAN -->
+
+        <!-- GAME 4 -->
+        <!---->
+        <div class='game4-main-div'>
+          <div id='game4-secondary-div'>
+            <div class='game4-div-with-question-and-answer'></div>
+            <span id='game4-how-to-play' class='game4-how-to-play-link' onclick='game4_howToPlay()'>How to Play?</span>
+            <input type='text' id='game4-input-text-value' spellcheck='false' autocomplete='off' autocorrect='off' class='game4-how-to-play-link' autofocus>
+            <input type="button" id='game4-clear-btn' value="clear" onclick='game4_clear()' class="game4-how-to-play-link">
+            <div id='game4-buttons-div'>
+              <input type='button' value='verify' class='game4-btn-class' id='game4-verify-button' onclick='game4_VerifyButtonFunc()'>
+              <span onclick='closeDivStudy()' class='game4-return-to-quiz-button'>Return to Hangman!</span>
+            </div>
+          </div>
+          <div id='game4-how-to-play-div' class='game4-div-with-question-and-answer'>
+            <p>Example:</p>
+            <br><br>
+                        <p>drops of water from clouds<br><span class='game4-how-to-play-red-msg hm-button-blink'>&#8618; Write the first letter of each word</span></p>
+            <br>
+            <p>rain<br><span class='game4-how-to-play-red-msg hm-button-blink'>&#8618; Write the complete word</span></p>
+            <br>
+            <p>Answer &#8594; <input type='text' id='game4-how-to-play-answer' value='dowfcrain'><!--<br><span class='game4-how-to-play-red-msg hm-button-blink'>&#8618; Don't use spaces</span>--></p>
+                      </div>
+          <input type='button' value='ok!' class='game4-btn-class' id='game4-ok-btn-how-to-play' onclick='game4_closeHowToPlay()'>
+        </div>
+        <div id='game4-final-div' class='game4-main-div'>
+          <input type="button" id='game4-play-again-btn' class='game4-final-div-buttons' value='Play Again!' onclick='game4_PlayAgain()'>
+          <input type="button" id='game4-go-to-quiz-btn' class='game4-final-div-buttons' value='Hangman!' onclick='closeDivStudy()'>
+        </div>
+        <div id='game4-study-mode-choose-game' class='game4-main-div'>
+          <input type="button" id='game4-play-again-btn' class='game4-final-div-buttons' value='Game 1' onclick='game4_newStudyGame()'>
+          <input type="button" id='game4-go-to-quiz-btn' class='game4-final-div-buttons' value='Game 2' onclick='openDivStudy3()'>
+        </div>
+        <!---->
+        <!-- GAME 4 -->
+
+        <!-- GAME 5 -->
+        <!---->
+        <div class='game5-main-div'>
+          <div id='game5-secondary-div'>
+            <div class='game5-div-with-question-and-answer'></div>
+            <div id='game5-buttons-div'>
+              <input type='button' class='game5-btn-class' id='game5-btn-id-0' onclick='game5_userClickBtnVerifyAnswer(this.value,this)'>
+              <input type='button' class='game5-btn-class' id='game5-btn-id-1' onclick='game5_userClickBtnVerifyAnswer(this.value,this)'>
+              <span onclick='closeDivStudy()' class='game5-return-to-hangman-button'>Return to Hangman!</span>
+            </div>
+          </div>
+        </div>
+        <div id='game5-final-div' class='game5-main-div'>
+          <input type="button" id='game5-play-again-btn' class='game5-final-div-buttons' value='Play Again!' onclick='game5_PlayAgain()'>
+          <input type="button" id='game5-go-to-game2' class='game5-final-div-buttons' value='Game 2' onclick='openDivStudy3()'>
+          <!--<input type="button" id='game5-go-to-quiz-btn' class='game5-final-div-buttons' value='Hangman!' onclick='closeDivStudy()'>-->
+        </div>
+        <div id='game5-study-mode-choose-game' class='game5-main-div'>
+          <input type="button" id='game5-go-to-game1' class='game5-final-div-buttons choose-game-div' value='Game 1' onclick='game5_newStudyGame()'>
+          <input type="button" id='game5-go-to-game2' class='game5-final-div-buttons choose-game-div' value='Game 2' onclick='openDivStudy3()'>
+          <!--<input type="button" id='game5-go-to-game3' class='game5-final-div-buttons choose-game-div' value='Game 3' onclick='game4_newStudyGame()'>-->
+        </div>
+        <!---->
+        <!-- GAME 5 -->
+        
+		<script src="js/script-1037-14.js"></script>
+
+		<script>
+		    function userClickPlayAgain(){
+                sessionStorage.user_click_play_again=1;
+            }
+		    function pointerEventsNone(id){
+		        document.getElementById(id).style.pointerEvents='none';
+		    }
+			function yyy2(c,i){
+			    seilaslals=true;
+                mobileFirstClickInAllGames=false;
+			    if(allGamesRootPage){
+                	setTimeout(function(){
+                	    allGamesTrueFalse=true;
+                	},100);
+			    }else{
+                	setTimeout(function(){
+                	    allGamesTrueFalse=true;
+                	},300);
+			    }
+
+                categoryBlink = document.getElementById(y);
+            	classNamePrepare = c.replace(/^all-levels\s|-list$/g,"");
+            	classNamePrepare2 = classNamePrepare + "-list";
+            	classNamePrepare3 = c.replace(/^(all-levels\s)(.*)$/g,'$1$2 menu_right_blink');
+            	classNamePrepare4 = c.replace(/^(all-levels\s)(.*)$/g,'$1$2');
+            	classNamePrepare5 = c.replace(/^(all-levels\s)(.*)$/g,'$1$2 not_menu_right_blink');
+
+                var getClassNameType2 = document.getElementsByClassName(classNamePrepare);
+
+                if((getClassNameType2[0].style.display != 'block')&&(allGamesTrueFalse)){
+                    seilaslals4=true;
+                }else if(getClassNameType2[0].style.display == 'block'){
+                    seilaslals4=false;
+                }
+
+                $(document).ready(function(){
+                    if((allGamesClickGoTopFalse)&&(seilaslals4)&&(seilaslals5)){
+                		var top = $("#"+i).position().top,
+                			currentScroll = container.scrollTop();
+
+                        if(i=="a"){
+                            var openMenuTimer=0;
+                        }else{
+                            var openMenuTimer=1000;
+                        }
+
+                		container.animate({
+                			scrollTop: currentScroll + top
+                		}, openMenuTimer);
+                    }else{
+                        allGamesClickGoTopFalse=true;
+                    }
+                    setTimeout(function(){
+                        if(allGamesTrueFalse){
+                            openList(c,i);
+                        }
+                    },100);
+                });
+			}
+		</script>
+		<script>liJqueryOpenWhenRefresh=true;</script><script>if(englishQuizMode){openList('all-levels letters3-list','i');}else if(sessionStorage.go_to_li_game){openList('all-levels letters3-list','i');}</script>        	</body>
+</html>
+<script>
+
+var categoryNameGoToLi="letters3";
+var categoryGameNumIndex="1";
+
+var container = $('#all-levels2');
+
+var categoryElementLi = "li[class^=all-levels ]";
+
+var removeQuiz=vtexto.replace("quiz_","");
+
+if(liJqueryOpenWhenRefresh){
+    //  //
+}
+
+function goToLiGameWhenRefresh(){
+  $(document).ready(function(){
+    seilaslals=false;
+    if(liFirstGoTop){
+      // 10.12.2022 //
+      var mathCeil=Math.ceil(categoryGameNumIndex/8);
+      if(customActived){
+          var ccc=categoryNameGoToLi+(mathCeil+2);
+      }else if(randomActived){
+          var ccc=categoryNameGoToLi+(mathCeil+1);
+      }else{
+          // 10.12.2022 //
+          if(window.location.href.indexOf('&id=i&customString=') > -1){
+            var ccc=categoryNameGoToLi+mathCeil+'p';
+          }else{
+            var ccc=categoryNameGoToLi+mathCeil;
+          }
+      }
+
+      // THIS CODE IS FOR EXAMPLE WHEN USER GOES TO GAME 3, IF THERE IS A PLUS GAME ABOVE, THEN THE SCROLL STOPS IN THIS GAME, EXAMPLE GAME 1 + 2 //
+      var gettingLiId_sliced=parseInt(ccc.slice(7+getCatParam.toString().length));
+
+      if(gettingLiId_sliced>2){
+          var gettingLetterPlusCatParam=ccc.slice(0,7+getCatParam.toString().length);
+          var gettingLetterPlusCatParamMinusOne=ccc.slice(0,7+getCatParam.toString().length)+(gettingLiId_sliced-1);
+          var gettingLetterPlusCatParamMinusTwo=ccc.slice(0,7+getCatParam.toString().length)+(gettingLiId_sliced-2);
+          if(document.getElementById(gettingLetterPlusCatParamMinusOne)){
+              if((document.getElementById(gettingLetterPlusCatParamMinusOne).innerHTML.includes('<svg'))
+              &&(document.getElementById(gettingLetterPlusCatParamMinusTwo).innerHTML.includes('<svg'))
+              &&(typeof document.getElementById(gettingLetterPlusCatParamMinusOne+'p') !== 'undefined'
+              && document.getElementById(gettingLetterPlusCatParamMinusOne+'p') !== null)
+              &&(!document.getElementById(gettingLetterPlusCatParamMinusOne+'p').innerHTML.includes('<svg'))){
+                  var top=$("#"+ccc).position().top-30,currentScroll=container.scrollTop();
+              }else{
+                  var top=$("#"+ccc).position().top,currentScroll=container.scrollTop();
+              }
+          }
+      }else{
+          var top=$("#"+ccc).position().top,currentScroll=container.scrollTop();
+      }
+
+      // 16.04.2023 //
+      //document.getElementById(ccc).style.color='#cc6600';
+      //if((categoryNameGoToLi!=='letters3')||(categoryGameNumIndex!=='1')||(userIsLoggedJS)){
+      if(categoryGameNumIndex!=='1'){
+        if(window.innerWidth>=750){
+          $(window).on('load',function(){
+            setTimeout(function(){
+              container.animate({
+                scrollTop: currentScroll + top
+              },1500);
+              $('.all-levels-sub-cat').bind('mousedown DOMMouseScroll mousewheel keyup',function(){
+                setTimeout(()=>{
+                  $(container).stop();
+                },300);
+              });
+            },500);
+            document.getElementById('menu-right').style.visibility='visible';
+          });
+        }else{
+          document.getElementById('menu-right').style.visibility='visible';
+          setTimeout(function(){
+            container.animate({
+              scrollTop: currentScroll + top
+            },1500);
+            if(window.innerWidth>768){
+              $('.all-levels-sub-cat').bind('mousedown DOMMouseScroll mousewheel keyup',function(){
+                setTimeout(()=>{
+                  $(container).stop();
+                },300);
+              });
+            }else{
+              document.getElementById('all-levels2').addEventListener("touchmove",function(){
+                  $(container).stop();
+              });
+              document.getElementById('all-levels2').addEventListener("mousewheel",function(){
+                setTimeout(()=>{
+                  $(container).stop();
+                },300);
+              });
+            }
+          },200);
+        }
+      }else{
+        $(window).on('load',function(){
+          document.getElementById('menu-right').style.visibility='visible';
+        });
+      }
+    }
+  });
+}
+
+if(localStorage.getItem(categoryName)){
+    var arrayLengthCategoryName=localStorage.getItem(categoryName);
+    arrayLengthCategoryName=arrayLengthCategoryName.split(",");
+}
+
+function btnClickModifyOnclick(){
+
+    var arrayLengthCategoryName2=localStorage.getItem(categoryName);
+    arrayLengthCategoryName2=arrayLengthCategoryName2.split(",");
+
+    if((arrayLengthCategoryName2.length-1) >= gameWordsQty){
+    	localStorageValue="";
+    	dontRepeatErrorsSequently="";
+    }
+
+	var onclickLocalId = document.getElementById(categoryName+"_btn");
+	var onclickLocalGetAt=onclickLocalId.getAttribute("onclick");
+    onclickLocalGetAt = onclickLocalGetAt.slice(0,-2);
+    var dontRepeatErrorsSequently = sessionStorage.getItem(categoryName)+"';";
+
+    if(!sessionStorage.getItem(categoryName)){
+        dontRepeatErrorsSequently="';";
+    }
+
+	onclickLocalId.setAttribute("onclick",onclickLocalGetAt+localStorageValue+dontRepeatErrorsSequently);
+
+	sessionStorage.removeItem(categoryName);
+}
+
+function btnClickModifyOnclick2(){
+	var onclickLocalId = document.getElementById("play_again_button");
+	var onclickLocalGetAt=onclickLocalId.getAttribute("onclick");
+	playAgainIndex=sessionStorage.play_again_index;
+	onclickLocalId.setAttribute("onclick",onclickLocalGetAt+playAgainIndex+"';");
+}
+
+function btnClickModifyOnclick3(){
+	var onclickLocalId = document.getElementById("play_again_button");
+	var onclickLocalGetAt=onclickLocalId.getAttribute("onclick");
+	onclickLocalId.setAttribute("onclick",onclickLocalGetAt+varIndexHalfString+"';");
+}
+
+function goToLiGame(m,h){
+    var goToLiGameZ=m;
+    var goToLiGameY=h;
+    sessionStorage.setItem("go_to_li_game",goToLiGameZ);
+    // BE CAREFUL BEFORE DELETING THE LINE BELOW //
+    //sessionStorage.setItem("click_game_href",goToLiGameY);
+}
+
+goToLiGameWhenRefresh();
+</script>
+<script>
+		var varA2 = [];
+		var varB2 = [];
+		var varB3 = [];
+		var varB4 = [];
+		var playAgainIndex = [];
+		var valueLevel = 1;
+
+		var arrayContent;
+		var arrayContent2="";
+
+        if(customStringBool){
+            var varIndiceIndexSlice = varIndiceIndex.length/2;
+            varIndiceIndex = varIndiceIndex.slice(0, varIndiceIndexSlice);
+            playAgainIndex = varIndiceIndex.toString();
+        }
+
+		function x1(){
+			document.getElementById("words-below").style.display="none";
+
+			function arrayShuffle(array,array2){
+			 var currentIndex=array.length,temporaryValue,randomIndex;
+			 var currentIndex2=array2.length,temporaryValue2,randomIndex2;
+
+			 while(0!==currentIndex){
+
+			  randomIndex=randomIndex2=Math.floor(Math.random()*currentIndex);
+			  currentIndex=currentIndex2-=1;
+
+			  temporaryValue=array[currentIndex];
+			  temporaryValue2=array2[currentIndex2];
+
+			  array[currentIndex]=array[randomIndex];
+			  array2[currentIndex2]=array2[randomIndex2];
+
+			  array[randomIndex]=temporaryValue;
+			  array2[randomIndex2]=temporaryValue2;
+			 }
+			  return [array,array2];
+			}
+
+			arrayShuffle(varAA,varBB);
+
+			varAA=varAA.slice(0,8);
+			varBB=varBB.slice(0,8);
+
+			varA = varAA;
+			varB = varBB;
+
+			var varBaux=[];
+			varBaux=varB;
+			var varBBaux=[];
+			varBBaux=varBB;
+
+			varB=varB.concat(varA);
+			varAA=varAA.concat(varBBaux);
+			varBB=varBB.concat(varAA);
+			varA=varA.concat(varBaux);
+
+			document.getElementById("dvv2").style.display="none";
+			location.href=window.location.href+'&customString=1,2,3,4,5,6,7,8';
+		}
+
+		function x2(){
+			checkCounter = 0;
+			document.getElementById("checkbox-counter").innerHTML="";
+
+			document.getElementById("checkbox-counter").style.display="none";
+			document.getElementById("checkbutton").style.display="none";
+			document.getElementById("checkbutton2").style.display="none";
+
+			document.getElementById("loading-blink-id").style.display="block";
+			arrayContent = document.getElementById("dvv1");
+			arrayContent3 = document.getElementById("dvv3");
+			arrayContent3.style.display="none";
+			arrayContent2="";
+			arrayContent3.innerHTML+="<p id='words-below' class='click-in-the-words-below'>&#9989; Check The Words Below</p>";
+            var halfLength=varA.length/2;
+
+			/*for(var i=0;i<varAA.length;i++){
+				if(varA[i].includes("<sup>")){
+					varB3[i] = varA[i].replace(/^(.*)(<sup>)(.*)(<\/sup>)$/g,'$3');
+					varB4[i] = varA[i].replace(/^(.*)(<sup>)(.*)(<\/sup>)$/g,'$1');
+				}else{
+				    if(englishQuizMode){
+				        varB3[i] = varB[i];
+				    }else{
+					    varB3[i] = varB[i].charAt(0) + " ...";
+				    }
+					varB4[i] = varA[i];
+				}
+
+                if(englishQuizMode){
+                  arrayContent2+="<label class='custom-label'><input class='custom-checkbox' onclick='checkboxCounter()' type='checkbox' name='vocabulary[]' value='" + i + "'/>" + varB3[i] + "&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;" + varB4[i].toLowerCase() + "</label><br>";
+                }else{
+                  arrayContent2+="<label class='custom-label'><input class='custom-checkbox' onclick='checkboxCounter()' type='checkbox' name='vocabulary[]' value='" + i + "'/>" + varB4[i] + "&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;" + varB3[i].toLowerCase() + "</label><br>";
+                }
+				if(i==varAA.length-1){
+					setTimeout(function(){
+						document.getElementById("words-below").style.display="block";
+						document.getElementById("checkbutton").style.display="block";
+						document.getElementById("checkbutton2").style.display="block";
+						document.getElementById("checkbox-counter").style.display="block";
+						document.getElementById("loading-blink-id").style.display="none";
+						arrayContent3.style.display="block";
+						arrayContent.innerHTML+=arrayContent2;
+					},1750);
+				}
+			}*/
+			// 03.05.2023 //
+			// REMOVING CAPITALIZE FROM DVV1 //
+            if((adminUser)&&(gameUrlNumber=="1999")){
+              document.getElementById("dvv1").style.textTransform="none";
+            }
+			preparingCheckbox();
+		}
+
+        var waitToShowCheckboxes=true;
+        var checkbox_index=0;
+
+        function preparingCheckbox(){
+          if(typeof varA[checkbox_index]=="undefined"){
+            return;
+          }
+          if(varA[checkbox_index].includes("<sup>")){
+            varB3[checkbox_index]=varA[checkbox_index].replace(/^(.*)(<sup>)(.*)(<\/sup>)$/g,'$3');
+            varB4[checkbox_index]=varA[checkbox_index].replace(/^(.*)(<sup>)(.*)(<\/sup>)$/g,'$1');
+          }else{
+              if(englishQuizMode){
+                varB3[checkbox_index]=varB[checkbox_index];
+              }else{
+                varB3[checkbox_index]=varB[checkbox_index].charAt(0) + " ...";
+              }
+            varB4[checkbox_index]=varA[checkbox_index];
+          }
+
+          var newLabel=document.createElement("label");
+          newLabel.classList.add("custom-label");
+
+          if(englishQuizMode){
+            newLabel.innerHTML="<input class='custom-checkbox' onclick='checkboxCounter()' type='checkbox' name='vocabulary[]' value='" + checkbox_index + "'/>" + varB3[checkbox_index] + "&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;" + varB4[checkbox_index].toLowerCase() + "</label><br>";
+          }else{
+            newLabel.innerHTML="<input class='custom-checkbox' onclick='checkboxCounter()' type='checkbox' name='vocabulary[]' value='" + checkbox_index + "'/>" + varB4[checkbox_index] + "&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;" + varB3[checkbox_index].toLowerCase() + "</label><br>";
+          }
+
+          newLabel.appendChild(document.createElement("br"));
+
+          if((checkbox_index>110)||(checkbox_index==varAA.length-1)){
+            if(waitToShowCheckboxes){
+              document.getElementById("words-below").style.display="block";
+              document.getElementById("checkbutton").style.display="block";
+              document.getElementById("checkbutton2").style.display="block";
+              document.getElementById("checkbox-counter").style.display="block";
+              document.getElementById("loading-blink-id").style.display="none";
+              arrayContent3.style.display="block";
+              waitToShowCheckboxes=false;
+            }
+          }
+          if(checkbox_index<varAA.length){
+            checkbox_index++;
+            arrayContent3.appendChild(newLabel);
+            setTimeout(preparingCheckbox,25);
+          }
+        }
+
+		function checkBox(){
+			var array = []
+			var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+			for (var i = 0; i < checkboxes.length; i++) {
+			  array.push(checkboxes[i].value)
+			}
+			var len=array.length;
+			if(len<4){
+				alert("The minimum words are 4");
+			}else if(len>30){
+			    alert("The maximum words are 30");
+			}else{
+			    // 10.12.2022 //
+				/*if(array.length % 2 !== 0){
+					array.pop();
+				}*/
+
+				for(var i=0;i<array.length;i++){
+					playAgainIndex[i] = varIndiceIndex[array[i]];
+					varA2[i] = varA[array[i]];
+					varB2[i] = varB[array[i]];
+				}
+
+                /* WE NEED TO USE THIS TO SORT AN ARRAY WITH INTEGERS */
+                playAgainIndex.sort(function(a,b){
+                    return a - b;
+                });
+
+				playAgainIndex=playAgainIndex.toString();
+				sessionStorage.play_again_index=playAgainIndex;
+
+				varA = varA2;
+				varB = varB2;
+				varAA = varA2;
+				varBB = varB2;
+
+				var varBaux=[];
+				varBaux=varB;
+				var varBBaux=[];
+				varBBaux=varBB;
+
+                if(!englishQuizMode){
+    				varB=varB.concat(varAA);
+    				varAA=varAA.concat(varBaux);
+    				varBB=varBB.concat(varA);
+    				varA=varA.concat(varBBaux);
+                }
+
+				document.getElementById("dvv2").style.display="none";
+				location.href=window.location.href+'&customString='+playAgainIndex;
+			}
+		}
+
+		var checkCounter = 0;
+
+		function checkboxCounter(){
+			if(event.target.checked){
+				checkCounter++;
+				document.getElementById("checkbox-counter").innerHTML=checkCounter;
+			}else{
+				checkCounter--;
+				if(checkCounter==0){
+					document.getElementById("checkbox-counter").innerHTML="";
+				}else{
+					document.getElementById("checkbox-counter").innerHTML=checkCounter;
+				}
+			}
+		}
+
+        var varIndexHalfString="";
+
+		if(randomActived){
+		    var varIndexToString = varIndex.toString();
+		    var indexStrLength = Math.floor(varIndexToString.length/2);
+	        varIndexHalfString = varIndexToString.substring(0, indexStrLength);
+		}
+
+        if(localStorage.email_success){
+            localStorage.removeItem("email_success");
+        }
+
+        if((gameUrlNumber >= 200100)&&(gameUrlNumber < 200200)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-spanish-dv').style.display='block';
+          }else{
+            document.getElementById('spanish-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200200)&&(gameUrlNumber < 200300)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-italian-dv').style.display='block';
+          }else{
+            document.getElementById('italian-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200300)&&(gameUrlNumber < 200400)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-german-dv').style.display='block';
+          }else{
+            document.getElementById('german-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200400)&&(gameUrlNumber < 200500)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-portuguese-dv').style.display='block';
+          }else{
+            document.getElementById('portuguese-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200500)&&(gameUrlNumber < 200600)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-chinese-dv').style.display='block';
+          }else{
+            document.getElementById('chinese-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200600)&&(gameUrlNumber < 200700)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-russian-dv').style.display='block';
+          }else{
+            document.getElementById('russian-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200700)&&(gameUrlNumber < 200800)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-japanese-dv').style.display='block';
+          }else{
+            document.getElementById('japanese-english-dv').style.display='block';
+          }
+        }else if((gameUrlNumber >= 200800)&&(gameUrlNumber < 200900)){
+          if(gameUrlNumber%2==0){
+            /**/
+          }else{
+            /**/
+          }
+        }else if((gameUrlNumber >= 200900)&&(gameUrlNumber < 201000)){
+          if(gameUrlNumber%2==0){
+            document.getElementById('english-catalan-dv').style.display='block';
+          }else{
+            document.getElementById('catalan-english-dv').style.display='block';
+          }
+        }
+
+        if(localStorage.training_mode){
+            document.getElementById('training-mode-btn').removeAttribute('class');
+        }
+
+        if(gameUrlNumber >= 100){
+            document.getElementById('training-mode-btn').setAttribute('onclick','traineeGame()');
+        }
+
+        // 16.04.2023 //
+        if(getCatParam==="3"){
+            // VOCABULARY //
+            showAllGamesMaxIndex=910;
+            displayBlockCategoryGameFC(3);
+        }else if(getCatParam==="1100"){
+            // SCIENCE //
+            showAllGamesMaxIndex=757;
+            displayBlockCategoryGameFC(1100);
+        }else if(getCatParam==="1101"){
+            // HUMAN BODY //
+            showAllGamesMaxIndex=56;
+            displayBlockCategoryGameFC(1101);
+        }else if(getCatParam==="1200"){
+            // BIOQUIMICA //
+            showAllGamesMaxIndex=10;
+            displayBlockCategoryGameFC(1200);
+        }else if(getCatParam==="1999"){
+            // COMMANDS //
+            showAllGamesMaxIndex=15;
+            displayBlockCategoryGameFC(1999);
+        }else if(getCatParam==="200001"){
+            // BIOQUIMICA //
+            showAllGamesMaxIndex=19;
+            displayBlockCategoryGameFC(200001);
+        }
+        function displayBlockCategoryGameFC(a){
+            let displayBlockCategoryGame=document.getElementsByClassName("letters"+a+"-list")[0];
+            displayBlockCategoryGame.style.display="block";
+        }
+        if(userIsPremium!=1){
+            document.getElementsByClassName("letters9998-list")[0].style.display="block";
+            document.getElementsByClassName("letters9999-list")[0].style.display="block";
+        }
+</script>
