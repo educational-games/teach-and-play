@@ -24,46 +24,46 @@
     }
   }
 
-	if(randomActived){
-		var categoryName = vtexto;
+  if(randomActived){
+    var categoryName = vtexto;
 
-		categoryName=categoryName+"_en_sp";
+    categoryName=categoryName+"_en_sp";
 
-		var sessionString="";
+    var sessionString="";
 
-		var categoryNameRandom=categoryName+"_random";
+    var categoryNameRandom=categoryName+"_random";
 
-        gameWordsQty=1;
+    gameWordsQty=1;
 
-		if(localStorage.getItem(categoryName)){
+    if(localStorage.getItem(categoryName)){
 
-			sessionSanitize1 = localStorage.getItem(categoryName);
-			sessionSanitize1=sessionSanitize1.replace(/&|<|"|\'/g,'');
+      sessionSanitize1 = localStorage.getItem(categoryName);
+      sessionSanitize1=sessionSanitize1.replace(/&|<|"|\'/g,'');
 
-			sessionSanitize1=sessionSanitize1.split(",");
+      sessionSanitize1=sessionSanitize1.split(",");
 
-            if(gameWordsQty>100){
-                var randomGameResetLocalStorageInfo=30;
-            }else{
-                var randomGameResetLocalStorageInfo=Math.ceil(gameWordsQty/5);
-            }
+      if(gameWordsQty>100){
+          var randomGameResetLocalStorageInfo=30;
+      }else{
+          var randomGameResetLocalStorageInfo=Math.ceil(gameWordsQty/5);
+      }
 
-			if((sessionSanitize1.length-1) >= randomGameResetLocalStorageInfo){
-				localStorage.removeItem(categoryName);
-				localStorage.removeItem(categoryNameRandom);
-				sessionStorage.removeItem(categoryName);
-			}else{
-				sessionString=sessionSanitize1.toString();
+      if((sessionSanitize1.length-1) >= randomGameResetLocalStorageInfo){
+        localStorage.removeItem(categoryName);
+        localStorage.removeItem(categoryNameRandom);
+        sessionStorage.removeItem(categoryName);
+      }else{
+        sessionString=sessionSanitize1.toString();
 
-				if((localStorage.getItem(categoryNameRandom))&&(!randomPlayAgain)){
+        if((localStorage.getItem(categoryNameRandom))&&(!randomPlayAgain)){
 
-					var x=localStorage.getItem(categoryName);
-					var y=localStorage.getItem(categoryNameRandom);
-					var z=window.location.href;
-					z=z.replace(/^(.*)(&randomString.*)$/g,'$1');
+          var x=localStorage.getItem(categoryName);
+          var y=localStorage.getItem(categoryNameRandom);
+          var z=window.location.href;
+          z=z.replace(/^(.*)(&randomString.*)$/g,'$1');
 
-					if(x!=y){
-						localStorage.setItem(categoryNameRandom,sessionString);
+          if(x!=y){
+            localStorage.setItem(categoryNameRandom,sessionString);
 
                         if(sessionStorage.getItem(categoryName)){
                             sessionString=sessionString+sessionStorage.getItem(categoryName);
@@ -77,16 +77,16 @@
                             sessionString=sessionString.toString();
                         }
 
-						location.replace(z+"&randomString=,"+sessionString);
-					}else if(!randomStringInUrl){
-						location.replace(z+"&randomString=,"+sessionString);
-					}
-				}else{
-					localStorage.setItem(categoryNameRandom,sessionString);
-				}
-			}
-		}
-	}
+            location.replace(z+"&randomString=,"+sessionString);
+          }else if(!randomStringInUrl){
+            location.replace(z+"&randomString=,"+sessionString);
+          }
+        }else{
+          localStorage.setItem(categoryNameRandom,sessionString);
+        }
+      }
+    }
+  }
 </script>
 
 <!DOCTYPE html>
@@ -181,7 +181,7 @@
     				<div id="time" class="blink_time_start" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Time</p><div class="info-game" id="timer2"></div></div>
     				<div id="erros" style="display:none;"><p class="info-divs">Repetindo</p><div class="info-erros" id="info-errors">Erros: </div></div>
 				</div>
-				<div id='menu-links-gm'><ul id='home-index-links-gm'><li><a class='account a-italic' href='../../login.php'>Login</a></li><script>liJqueryOpenWhenRefresh=true;</script><li><a class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a></li></ul></div><script>var allGamesRootPage=false;</script>			</div>
+				<div id='menu-links-gm'><ul id='home-index-links-gm'><li><a class='account a-italic' href='https://teach-and-play.com/login.php'>Login</a></li><script>liJqueryOpenWhenRefresh=true;</script><li><a class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a></li></ul></div><script>var allGamesRootPage=false;</script>			</div>
 			<p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();">Game ←</p>
 		</div>
 
@@ -206,13 +206,13 @@
 	<!---->
 		<!---->
     <li id="a" class="all-levels letters3-list" onclick="/*yyy2(this.className,this.id);*/"><a class="all-levels letters3-list" href="#">& Vocabulary</a></li>
-	<li class='all-levels-sub-cat letters3'><a id='letters31' href='?cat=quiz_letters3&num=1&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 1</a></li><li class='all-levels-sub-cat letters3'><a id='letters32' href='?cat=quiz_letters3&num=9&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 2</a></li><li class='all-levels-sub-cat letters3'><a id='letters33' href='?cat=quiz_letters3&num=17&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 3</a></li><li class='all-levels-sub-cat letters3'><a id='letters34' href='?cat=quiz_letters3&num=25&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 4 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters35' href='?cat=quiz_letters3&num=33&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 5 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters36' href='?cat=quiz_letters3&num=41&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 6 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters37' href='?cat=quiz_letters3&num=49&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 7 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters38' href='?cat=quiz_letters3&num=57&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 8 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters39' href='?cat=quiz_letters3&num=65&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 9 <sup class='premium-sup'>premium</sup></a></li>	<!---->
+	<li class='all-levels-sub-cat letters3'><a id='letters31' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=1&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 1</a></li><li class='all-levels-sub-cat letters3'><a id='letters32' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=9&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 2</a></li><li class='all-levels-sub-cat letters3'><a id='letters33' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=17&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 3</a></li><li class='all-levels-sub-cat letters3'><a id='letters34' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=25&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 4 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters35' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=33&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 5 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters36' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=41&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 6 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters37' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=49&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 7 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters38' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=57&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 8 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters39' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=65&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 9 <sup class='premium-sup'>premium</sup></a></li>	<!---->
 		<!-- THIS CATEGORY IS PRIVATE -->
 			<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
 	    <div id="show-all-games-no-logged-user"></div>
-    <li id="all-games-li" class="all-levels letters9998-list" onclick="showAllGamesNoLoggedUser()"><a class="all-levels letters1101-list" href="#">& All Games?</a></li>
+    <li id="all-games-li" class="all-levels letters9998-list" onclick="showAllGamesNoLoggedUser()"><a class="all-levels letters1101-list" href="https://teach-and-play.com/login.php">& All Games?</a></li>
     <li class="all-levels letters9999-list" style="margin-top:22px;">
-        <a class="all-levels" style="color:navy;" href="../../login.php">+ 900 Games!</a>
+        <a class="all-levels" style="color:navy;" href="https://teach-and-play.com/login.php">+ 900 Games!</a>
     </li>
     	<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
 				</ul>
@@ -351,7 +351,7 @@
               <input type="button" id="private-game-hm-letter-answer-hidden" onclick="hmLetterAnswerHidden()">
             </div>
             <div class="hm-footer">
-              <a class='hm-login' href='../../login.php'>Login</a><a class='hm-go-quiz' onclick='closeDivStudy(1)'>Go Quiz</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
+              <a class='hm-login' href='https://teach-and-play.com/login.php'>Login</a><a class='hm-go-quiz' onclick='closeDivStudy(1)'>Go Quiz</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
           </div>
           <div class="hm-correct-wrong-div">
             <div class="hm-info"></div>
@@ -368,7 +368,7 @@
             <!--<input type="button" class="hm-info-next hm-last-games-btn" onclick="window.location='../../user-last-games.php';" value="Last games">-->
             <input type="button" class="hm-info-next hm-last-games-btn" onclick="closeDivStudy(1)" value="Go quiz!">
             <div class="hm-footer">
-              <a class='hm-login' href='../../login.php'>Login</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
+              <a class='hm-login' href='https://teach-and-play.com/login.php'>Login</a><script>liJqueryOpenWhenRefresh=true;</script><a class='hm-more-games' onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games!</a><script>var allGamesRootPage=false;</script>            </div>
           </div>
           <div class="hm-dv-study-here hm-correct-wrong-div" onclick="hmStudyNext()">
           </div>
