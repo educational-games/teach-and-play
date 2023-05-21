@@ -1,34 +1,28 @@
 <script>
-	var randomActived=false;
-	var vtexto="quiz_letters3";
-	var randomStringInUrl=null;
-	var randomPlayAgain=false;
-	var userIsLoggedJS=false;
-	var userIsPremium=0;
+  var randomActived=false;
+  var vtexto="quiz_letters3";
+  var randomStringInUrl=null;
+  var randomPlayAgain=false;
+  var userIsLoggedJS=false;
+  var userIsPremium=0;
   var gameWordsQty="";
   var sessionSanitize1="";
   var adminUser=false;
-
   var quizWordLength=vtexto.replace("quiz_","");
   var quizWordLengthGame=1;
   var goToLiThisId=quizWordLength+quizWordLengthGame;
   var goToLiUrlPath=window.location.search;
-
-  // THIS IS NECESSARY TO PUT A STAR ON RIGHT SIDE AT GAME LEVEL //
   var getIdParam="i";
   var getCatParam=vtexto.replace("quiz_letters","");
-
-  // 10.12.2022 //
   var getGameNumber=(quizWordLengthGame+7)/8;
-      // THIS IS NECESSARY TO PUT A STAR ON RIGHT SIDE AT GAME LEVEL //
 
-    if((sessionStorage.go_to_li_game)&&((!userIsLoggedJS)||(userIsPremium!=1))){
-        var removingQuiz=vtexto.replace("quiz_","");
-        var sessionGoTo=sessionStorage.go_to_li_game.replace(removingQuiz,"");
-        if(sessionGoTo>3){
-            sessionStorage.removeItem("go_to_li_game");
-        }
+  if((sessionStorage.go_to_li_game)&&((!userIsLoggedJS)||(userIsPremium!=1))){
+    var removingQuiz=vtexto.replace("quiz_","");
+    var sessionGoTo=sessionStorage.go_to_li_game.replace(removingQuiz,"");
+    if(sessionGoTo>3){
+      sessionStorage.removeItem("go_to_li_game");
     }
+  }
 
 	if(randomActived){
 		var categoryName = vtexto;
