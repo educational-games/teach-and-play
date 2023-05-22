@@ -26,26 +26,19 @@
 
   if(randomActived){
     var categoryName = vtexto;
-
     categoryName=categoryName+"_en_sp";
-
     var sessionString="";
-
     var categoryNameRandom=categoryName+"_random";
-
     gameWordsQty=1;
 
     if(localStorage.getItem(categoryName)){
-
       sessionSanitize1 = localStorage.getItem(categoryName);
       sessionSanitize1=sessionSanitize1.replace(/&|<|"|\'/g,'');
-
       sessionSanitize1=sessionSanitize1.split(",");
-
       if(gameWordsQty>100){
-          var randomGameResetLocalStorageInfo=30;
+        var randomGameResetLocalStorageInfo=30;
       }else{
-          var randomGameResetLocalStorageInfo=Math.ceil(gameWordsQty/5);
+        var randomGameResetLocalStorageInfo=Math.ceil(gameWordsQty/5);
       }
 
       if((sessionSanitize1.length-1) >= randomGameResetLocalStorageInfo){
@@ -54,29 +47,21 @@
         sessionStorage.removeItem(categoryName);
       }else{
         sessionString=sessionSanitize1.toString();
-
         if((localStorage.getItem(categoryNameRandom))&&(!randomPlayAgain)){
-
           var x=localStorage.getItem(categoryName);
           var y=localStorage.getItem(categoryNameRandom);
           var z=window.location.href;
           z=z.replace(/^(.*)(&randomString.*)$/g,'$1');
-
           if(x!=y){
             localStorage.setItem(categoryNameRandom,sessionString);
-
-                        if(sessionStorage.getItem(categoryName)){
-                            sessionString=sessionString+sessionStorage.getItem(categoryName);
-
-                            var sessionStringArray = sessionString.split(',');
-
-                            sessionString=sessionStringArray.filter(function(item,index,inputArray){
-                                return inputArray.indexOf(item)==index;
-                            });
-
-                            sessionString=sessionString.toString();
-                        }
-
+            if(sessionStorage.getItem(categoryName)){
+              sessionString=sessionString+sessionStorage.getItem(categoryName);
+              var sessionStringArray = sessionString.split(',');
+              sessionString=sessionStringArray.filter(function(item,index,inputArray){
+	              return inputArray.indexOf(item)==index;
+              });
+              sessionString=sessionString.toString();
+            }
             location.replace(z+"&randomString=,"+sessionString);
           }else if(!randomStringInUrl){
             location.replace(z+"&randomString=,"+sessionString);
@@ -91,135 +76,126 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<title>Learn English With Games!</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="styles/style-1037.css">
-		<link rel="stylesheet" type="text/css" href="styles/responsive.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+  <head>
+    <title>Learn English With Games!</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/style-1037.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167185363-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167185363-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-167185363-1');
-        </script>
+      gtag('config', 'UA-167185363-1');
+    </script>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-		<script type='text/javascript'>
-			var varA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
-			var varB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
-			var varAA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
-			var varBB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
-			var valueLevel=1;
-			var varIndex=[];
-			var liJqueryOpenWhenRefresh=false;
-			var allGamesClickGoTopFalse=true;
-			var liFirstGoTop=true;
-			var customActived=false;
-			var customStringBool=null;
-			var varIndiceIndex=["7","3","2","6","5","1","4","8"];
-			var gameUrlNumber="3";
-			var dontShowPlaceholder=null;
-			var dontShowKeyboard=null;
-			var openCustomDiv=false;
-			var valueLevelForTouchGame=valueLevel;
-		</script>
-		<style>
-			#correct-image-green{
-				height:100%;
-				width:100%;
-			}
-            #dv1{
-            	display:none;
-            }
-            .next-game2-dv3{
-            	display:none;
-            }
-            		</style>
-	</head>
-	<body>
-		<div id="dv1">
-			<div id="dv2" class='different-selection-color'>
-			</div>
-			<div class="triangle-right"></div>
-			<div class="triangle-left"></div>
-			<div id="dv3">
-			</div>
-			<div id="study">
-				<p id="home-link" class="p-game margin-left-zero" style="display:block;">Game 1</p>
-				<p id="see-list" onclick="nextGame3()">Game 1</p>
-				<div id="pointing" style="display: none;"></div>
-			</div>
-			<div id="trainee-game-link">
-				<p id="trainee-game-link" class="trainee-game-link" onclick="location.reload()"><!--<span class="trainee_blink_circle">&#9679;</span>--> Main Game</p>
-			</div>
-		</div>
-		<div id="next-game2-dv1">
-			<div id="next-game2-dv3" class="next-game2-dv3">
-			    <input type='text' onclick='deleteLastCharOnKeyboardMode(this.value);' onfocus='blurInputWhenKeyboardOn()' onkeyup='showAnswerInAlert(this.value,this)' id='next-game2-input-text' spellcheck='false' autocomplete='off' maxlength='100' autocorrect='off' style='visibility:hidden;background-color:white;' tabindex='1'>				<input id="training-mode-btn" style="display:none" type="button" onclick="newStudyGame()" value="Game 1">
-				<input id="training-mode-btn2" style="display:none" type="button" onclick="openDivStudy3()" value="Game 2">
-				<input id="go-hangman" type="button" onclick="location.reload()" value="Go Hangman">
+    <script type='text/javascript'>
+      var varA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
+      var varB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
+      var varAA=["natural ability to do something well.","designed and made using the most recent ideas and methods.","a male child or, more generally, a male of any age.","with little or no hair on the head.","to make a continuous low sound.","to satisfy someone by giving them something that is wanted or needed.","the highest point or top of a shape or object.","a warning of danger, usually a loud noise or flashing light."];
+      var varBB=["flair","modern","boy","bald","rumble","sate","apex","alarm"];
+      var valueLevel=1;
+      var varIndex=[];
+      var liJqueryOpenWhenRefresh=false;
+      var allGamesClickGoTopFalse=true;
+      var liFirstGoTop=true;
+      var customActived=false;
+      var customStringBool=null;
+      var varIndiceIndex=["7","3","2","6","5","1","4","8"];
+      var gameUrlNumber="3";
+      var dontShowPlaceholder=null;
+      var dontShowKeyboard=null;
+      var openCustomDiv=false;
+      var valueLevelForTouchGame=valueLevel;
+    </script>
+    <style>
+      #correct-image-green{
+        height:100%;
+        width:100%;
+      }
+      #dv1{
+        display:none;
+      }
+      .next-game2-dv3{
+        display:none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dv1">
+      <div id="dv2" class='different-selection-color'>
+      </div>
+      <div class="triangle-right"></div>
+      <div class="triangle-left"></div>
+      <div id="dv3"></div>
+      <div id="study">
+        <p id="home-link" class="p-game margin-left-zero" style="display:block;">Game 1</p>
+        <p id="see-list" onclick="nextGame3()">Game 1</p>
+        <div id="pointing" style="display: none;"></div>
+      </div>
+      <div id="trainee-game-link">
+        <p id="trainee-game-link" class="trainee-game-link" onclick="location.reload()"><!--<span class="trainee_blink_circle">&#9679;</span>--> Main Game</p>
+      </div>
+    </div>
+    <div id="next-game2-dv1">
+      <div id="next-game2-dv3" class="next-game2-dv3">
+        <input type='text' onclick='deleteLastCharOnKeyboardMode(this.value);' onfocus='blurInputWhenKeyboardOn()' onkeyup='showAnswerInAlert(this.value,this)' id='next-game2-input-text' spellcheck='false' autocomplete='off' maxlength='100' autocorrect='off' style='visibility:hidden;background-color:white;' tabindex='1'>				<input id="training-mode-btn" style="display:none" type="button" onclick="newStudyGame()" value="Game 1">
+        <input id="training-mode-btn2" style="display:none" type="button" onclick="openDivStudy3()" value="Game 2">
+        <input id="go-hangman" type="button" onclick="location.reload()" value="Go Hangman">
 
-				<input type="button" class="verify-vf" id="verify" onclick="nextGame3verify();stopBlink();" value="verify" style="display:none;"><input type="button" class="verify-next" id="next-button" onclick="nextButtonTrainee()" value="next" style="display: none;"><span id="equalNotNeeded" class="equal-not-needed">Não precisa colocar&nbsp; =</span>
-				<div id="trainee-game">
-				</div>
-				<input type="button" id="see-answer" value=" ? " onclick="seeAnswer()">
-				<p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();/*returnGameFocusTextInput();*/" style="display: none;">Game '<!--<span class="arrow-size"><</span>--></p>
-				<div id='random-answer-btn' style='display:none'></div>
-				<div id="special-chars-keyboard"></div>
-				<input class="hide-button" type="button" onclick="hintButton()" value="Hint *">
-				<span class="show-answer-few-seconds"></span>
-			</div>
-			<div id="dv5">
-			    <div class='different-selection-color'>
-    				<div id="pontuation" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Score</p><div class="info-game" id="pontuation2"></div></div>
-    				<div id="time" class="blink_time_start" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Time</p><div class="info-game" id="timer2"></div></div>
-    				<div id="erros" style="display:none;"><p class="info-divs">Repetindo</p><div class="info-erros" id="info-errors">Erros: </div></div>
-				</div>
-				<div id='menu-links-gm'><ul id='home-index-links-gm'><li><a class='account a-italic' href='https://teach-and-play.com/login.php'>Login</a></li><script>liJqueryOpenWhenRefresh=true;</script><li><a class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a></li></ul></div><script>var allGamesRootPage=false;</script>			</div>
-			<p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();">Game ←</p>
-		</div>
-
-        <div class='dv-study-mode'>
-            <h2 class='h2-study-mode'>Go to Study Mode ?</h2>
-            <br><br>
-            <input id='fast' type='radio' name='study-speed' value='fast' onclick='studyModeOk()'>
-            <label for='fast'>Fast</label><br><br>
-            <input id='medium' type='radio' name='study-speed' value='medium' onclick='studyModeOk()'>
-            <label for='medium'>Medium</label><br><br>
-            <input id='slow' type='radio' name='study-speed' value='slow' onclick='studyModeOk()'>
-            <label for='slow'>Slow</label>
-            <div class='study-mode-btn'>
-                <input type='button' value='Ok' style='margin-right:12px;' onclick='studyModeOk()'>
-                <input type='button' value='Cancel' onclick='studyModeCancel()'>
-            </div>
+        <input type="button" class="verify-vf" id="verify" onclick="nextGame3verify();stopBlink();" value="verify" style="display:none;"><input type="button" class="verify-next" id="next-button" onclick="nextButtonTrainee()" value="next" style="display: none;"><span id="equalNotNeeded" class="equal-not-needed">Não precisa colocar&nbsp; =</span>
+        <div id="trainee-game">
         </div>
-
+        <input type="button" id="see-answer" value=" ? " onclick="seeAnswer()">
+        <p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();/*returnGameFocusTextInput();*/" style="display: none;">Game '<!--<span class="arrow-size"><</span>--></p>
+        <div id='random-answer-btn' style='display:none'></div>
+        <div id="special-chars-keyboard"></div>
+        <input class="hide-button" type="button" onclick="hintButton()" value="Hint *">
+        <span class="show-answer-few-seconds"></span>
+      </div>
+      <div id="dv5">
+        <div class='different-selection-color'>
+          <div id="pontuation" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Score</p><div class="info-game" id="pontuation2"></div></div>
+          <div id="time" class="blink_time_start" style="display:none;" onclick="inputTextFocus()"><p class="info-divs">Time</p><div class="info-game" id="timer2"></div></div>
+          <div id="erros" style="display:none;"><p class="info-divs">Repetindo</p><div class="info-erros" id="info-errors">Erros: </div></div>
+        </div>
+        <div id='menu-links-gm'><ul id='home-index-links-gm'><li><a class='account a-italic' href='https://teach-and-play.com/login.php'>Login</a></li><script>liJqueryOpenWhenRefresh=true;</script><li><a class="account a-italic" onclick="allLevelsResp();yyy2('all-levels letters3-list','i');goToLiGameWhenRefresh();gotoLiGameWhenClick()">All Games</a></li></ul></div>
+        <script>var allGamesRootPage=false;</script>
+      </div>
+      <p id="return-link2" class="p-game-home margin-left-zero" onclick="nextGame3();">Game ←</p>
+		</div>
+    <div class='dv-study-mode'>
+      <h2 class='h2-study-mode'>Go to Study Mode ?</h2>
+      <br><br>
+      <input id='fast' type='radio' name='study-speed' value='fast' onclick='studyModeOk()'>
+      <label for='fast'>Fast</label><br><br>
+      <input id='medium' type='radio' name='study-speed' value='medium' onclick='studyModeOk()'>
+      <label for='medium'>Medium</label><br><br>
+      <input id='slow' type='radio' name='study-speed' value='slow' onclick='studyModeOk()'>
+      <label for='slow'>Slow</label>
+      <div class='study-mode-btn'>
+        <input type='button' value='Ok' style='margin-right:12px;' onclick='studyModeOk()'>
+        <input type='button' value='Cancel' onclick='studyModeCancel()'>
+      </div>
+    </div>
 		<div id="menu-right" style='visibility:visible' class='menu'>
-			<p id="all-levels2-p" style="display:block;" class="first-p">All Games</p>
-			<ul id="all-levels2" style="display:block;" class="all-levels">
-	<!---->
-		<!---->
-    <li id="a" class="all-levels letters3-list" onclick="/*yyy2(this.className,this.id);*/"><a class="all-levels letters3-list" href="#">& Vocabulary</a></li>
-	<li class='all-levels-sub-cat letters3'><a id='letters31' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=1&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 1</a></li><li class='all-levels-sub-cat letters3'><a id='letters32' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=9&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 2</a></li><li class='all-levels-sub-cat letters3'><a id='letters33' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=17&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 3</a></li><li class='all-levels-sub-cat letters3'><a id='letters34' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=25&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 4 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters35' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=33&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 5 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters36' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=41&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 6 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters37' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=49&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 7 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters38' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=57&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 8 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters39' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=65&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 9 <sup class='premium-sup'>premium</sup></a></li>	<!---->
-		<!-- THIS CATEGORY IS PRIVATE -->
-			<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
-	    <div id="show-all-games-no-logged-user"></div>
-    <li id="all-games-li" class="all-levels letters9998-list" onclick="showAllGamesNoLoggedUser()"><a class="all-levels letters1101-list" href="https://teach-and-play.com/login.php">& All Games?</a></li>
-    <li class="all-levels letters9999-list" style="margin-top:22px;">
-        <a class="all-levels" style="color:navy;" href="https://teach-and-play.com/login.php">+ 900 Games!</a>
-    </li>
-    	<!--28.01.2023 - REMOVING ALL CATEGORIES - LEAVING ONLY 1 CATEGORY - HANGMAN -->
-				</ul>
+      <p id="all-levels2-p" style="display:block;" class="first-p">All Games</p>
+      <ul id="all-levels2" style="display:block;" class="all-levels">
+        <li id="a" class="all-levels letters3-list" onclick="/*yyy2(this.className,this.id);*/"><a class="all-levels letters3-list" href="#">& Vocabulary</a></li>
+        <li class='all-levels-sub-cat letters3'><a id='letters31' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=1&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 1</a></li><li class='all-levels-sub-cat letters3'><a id='letters32' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=9&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 2</a></li><li class='all-levels-sub-cat letters3'><a id='letters33' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=17&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 3</a></li><li class='all-levels-sub-cat letters3'><a id='letters34' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=25&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 4 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters35' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=33&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 5 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters36' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=41&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 6 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters37' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=49&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 7 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters38' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=57&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 8 <sup class='premium-sup'>premium</sup></a></li><li class='all-levels-sub-cat letters3'><a id='letters39' href='https://teach-and-play.com/qz/english/?cat=quiz_letters3&num=65&id=i' onclick='goToLiGame(this.id,this.href)'>&#9679; Game 9 <sup class='premium-sup'>premium</sup></a></li>	<!---->
+        <div id="show-all-games-no-logged-user"></div>
+        <li id="all-games-li" class="all-levels letters9998-list"><a class="all-levels letters1101-list" href="https://teach-and-play.com/login.php">& All Games?</a></li>
+        <li class="all-levels letters9999-list" style="margin-top:22px;"><a class="all-levels" style="color:navy;" href="https://teach-and-play.com/login.php">+ 900 Games!</a></li>
+      </ul>
 			<p id="return-to-game-resp" onclick="returnToGameResp()" class="last-p">Close tab</p>
 		</div>
 
-		<!-- NEW RIGHT MENU  -->
+		<!-- RIGHT MENU  -->
 
 		<!-- STAR IMAGE ON RIGHT SIDE OF GAME -->
         
